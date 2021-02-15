@@ -16,7 +16,6 @@ func _on_Timer_timeout():
 
 func _on_Stats_health_changed(value):
 	visible = true
-	print(pixelsPerDamageUnit)
 	lineLength = startLength - (pixelsPerDamageUnit * (stats.max_health - stats.health))
 	timer.start()
 	set_point_position(1, Vector2(lineLength, 0)) #update length of health bar

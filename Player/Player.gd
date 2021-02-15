@@ -16,6 +16,7 @@ var velocity = Vector2.ZERO
 var direction_vector = Vector2.LEFT #instantiate to player direction
 var playerStats = PlayerStats
 
+onready var camera = $Camera2D
 onready var hurtTimer = $HurtTimer
 onready var playerSprite = $PlayerSprite
 onready var animationTree = $AnimationTree

@@ -36,6 +36,11 @@ func _physics_process(delta):
 				var player = playerDetectionZone.player
 				var direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MOVEMENT_SPEED, ACCELERATION * delta)
+	if velocity.x < 0:
+		batSprite.flip_h = true	
+	else:
+		batSprite.flip_h = false
+
 	velocity = move_and_slide(velocity)
 
 func seek_player():
