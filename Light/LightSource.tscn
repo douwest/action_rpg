@@ -5,6 +5,7 @@
 [node name="LightNode" type="Node2D"]
 
 [node name="Light2D" type="Light2D" parent="."]
+enabled = false
 texture = ExtResource( 1 )
 texture_scale = 0.9
 energy = 0.7
