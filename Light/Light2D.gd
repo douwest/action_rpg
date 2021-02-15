@@ -4,12 +4,6 @@ onready var noise = OpenSimplexNoise.new()
 var value = 0.0
 const MAX_VALUE = 100000000
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	value = randi() % MAX_VALUE
