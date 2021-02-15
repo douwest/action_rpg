@@ -5,8 +5,10 @@ onready var current_experience_progress = $CurrentExperienceProgress
 
 func set_experience_level(value):
 	current_experience_progress.text = str(value) + "/" + str(PlayerStats.experience_needed)
-	var current_level_experience = PlayerStats.experience_needed - PlayerStats.current_experience
-	var factor = current_level_experience / PlayerStats.current_level_experience_needed
+	var current_level_experience = PlayerStats.current_experience - PlayerStats.current_level_start_experience
+	print(str(current_level_experience) + "-----" + str(PlayerStats.current_level_start_experience))
+	var factor = float(current_level_experience) / PlayerStats.current_level_experience_needed
+	print(factor)
 	experience_bar_progress.width = int(300 * factor)
 	
 

@@ -24,12 +24,12 @@ func set_health(value):
 
 func set_experience(value):
 	current_experience = value
-	emit_signal("experience_changed", value)
 	if(current_experience >= experience_needed):
 		current_level += 1
 		current_level_start_experience = experience_needed
-		experience_needed += experience_needed * current_level
+		experience_needed *= 2
 		emit_signal("level_up", current_level)
+	emit_signal("experience_changed", value)
 
 func increaseExperienceBy(amount):
 	set_experience(current_experience + amount)
