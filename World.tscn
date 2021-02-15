@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Camera/ZoomingCamera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Light/LightSource.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World Objects/Candle.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://UI/CurrentLevel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/ExperienceBar.tscn" type="PackedScene" id=6]
@@ -38,9 +38,6 @@
 [node name="World" type="Node2D"]
 position = Vector2( 40, -112 )
 
-[node name="LightSource" parent="." instance=ExtResource( 3 )]
-position = Vector2( 100.78, 271.64 )
-
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
@@ -52,6 +49,43 @@ position = Vector2( 120, 200 )
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 8 )]
 position = Vector2( 232, 168 )
+
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 8 )]
+position = Vector2( 272, 384 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 8 )]
+position = Vector2( 520, 280 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 8 )]
+position = Vector2( 528, 40 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 8 )]
+position = Vector2( 424, 72 )
+
+[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 8 )]
+position = Vector2( 512, 400 )
+
+[node name="Objects" type="YSort" parent="YSort"]
+
+[node name="Candle" parent="YSort/Objects" instance=ExtResource( 3 )]
+position = Vector2( -8, 376 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Candle2" parent="YSort/Objects" instance=ExtResource( 3 )]
+position = Vector2( 232, 8 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Candle3" parent="YSort/Objects" instance=ExtResource( 3 )]
+position = Vector2( 16, 136 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Candle4" parent="YSort/Objects" instance=ExtResource( 3 )]
+position = Vector2( 336, 32 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Candle5" parent="YSort/Objects" instance=ExtResource( 3 )]
+position = Vector2( 536, 360 )
+scale = Vector2( 0.25, 0.25 )
 
 [node name="Floor" type="Node2D" parent="."]
 
