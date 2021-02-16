@@ -34,6 +34,8 @@ func _set_zoom_level(value: float) -> void:
 	tween.start()
 
 func _unhandled_input(event):
+	if event is InputEventMagnifyGesture:
+		_set_zoom_level(_zoom_level * event.factor)
 	if event.is_action_pressed("ui_zoom_in"):
 		# Inside a given class, we need to either write `self._zoom_level = ...` or explicitly
 		# call the setter function to use it.
