@@ -2,11 +2,9 @@ extends Node
 
 export(int) var max_health = 1
 export(int) var current_level = 1
-export(int) var current_experience = 0 setget set_experience
-export(int) var current_level_start_experience = 0
+export(int) var total_experience = 0 setget set_experience
 export(int) var experience_needed = 10
-
-export(int) var current_level_experience_needed = experience_needed - current_level_start_experience
+export(int) var current_level_start_experience = 0
 
 onready var health = max_health setget set_health
 
@@ -23,16 +21,17 @@ func set_health(value):
 		emit_signal("no_health")
 
 func set_experience(value):
-	current_experience = value
-	if(current_experience >= experience_needed):
+	total_experience = value
+	if(total_experience >= experience_needed):
 		current_level += 1
 		current_level_start_experience = experience_needed
-		experience_needed *= 2
+		experience_needed *= 3
+		print(str(experience_needed));
 		emit_signal("level_up", current_level)
 	emit_signal("experience_changed", value)
 
 func increaseExperienceBy(amount):
-	set_experience(current_experience + amount)
+	set_experience(total_experience + amount)
 
 func reduceHealthBy(amount):
 	set_health(health - amount)
