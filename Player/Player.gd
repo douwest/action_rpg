@@ -39,7 +39,6 @@ func move_state(delta):
 	var input_vector = getInputVector()
 	
 	if input_vector != Vector2.ZERO:
-		
 		direction_vector = input_vector
 		swordHitbox.knockback_vector = direction_vector
 		updateBlendPositions(input_vector)	
@@ -65,7 +64,7 @@ func roll_state(delta):
 	velocity = direction_vector * ROLL_SPEED
 	moveAndSlide()
 	setAnimationTo("Roll")
-
+	
 func attack_end():
 	setState(MOVE)
 	

@@ -2,7 +2,7 @@ extends Camera2D
 # Lower cap for the `_zoom_level`.
 export var min_zoom := 0.5
 # Upper cap for the `_zoom_level`.
-export var max_zoom := 2.0
+export var max_zoom := 1.5
 # Controls how much we increase or decrease the `_zoom_level` on every turn of the scroll wheel.
 export var zoom_factor := 0.1
 # Duration of the zoom's tween animation.
@@ -13,8 +13,10 @@ var _zoom_level := 1.0 setget _set_zoom_level
 
 # We store a reference to the scene's tween node.
 onready var tween: Tween = $Tween
+onready var audioStream: AudioStreamPlayer = $AudioStreamPlayer
 
 func _set_zoom_level(value: float) -> void:
+	audioStream.volume_db = -7 * _zoom_level
 	# We limit the value between `min_zoom` and `max_zoom`
 	_zoom_level = clamp(value, min_zoom, max_zoom)
 	# Then, we ask the tween node to animate the camera's `zoom` property from its current value
