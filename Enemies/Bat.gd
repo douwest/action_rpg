@@ -16,6 +16,8 @@ var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 var state = IDLE
 
+signal died
+
 onready var batStats = $HealthBar/Stats
 onready var batSprite = $AnimatedSprite
 onready var flashTimer = $FlashTimer
@@ -61,6 +63,7 @@ func _on_BatHurtbox_area_entered(damagingObject):
 #Receive killing hit
 func _on_Stats_no_health():
 	queue_free()
+	emit_signal("died")
 	PlayerStats.increaseExperienceBy(EXPERIENCE)
 
 #Flash the sprite
