@@ -8,9 +8,9 @@
 [ext_resource path="res://UI/ExperienceBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/CurrentLevel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=8]
-[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Tilesets/DungeonTileSet.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/Spawner.tscn" type="PackedScene" id=11]
+[ext_resource path="res://HUD/CharacterUI.tscn" type="PackedScene" id=12]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -122,11 +122,6 @@ format = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HealthUI" parent="UI" instance=ExtResource( 9 )]
-margin_left = 8.0
-margin_top = 8.0
-margin_bottom = 24.0
-
 [node name="CurrentLevel" parent="UI" instance=ExtResource( 7 )]
 margin_left = 6.22603
 margin_top = 22.0821
@@ -138,6 +133,8 @@ margin_left = 160.0
 margin_top = 168.0
 margin_right = 460.0
 margin_bottom = 193.0
+
+[node name="CharacterUI" parent="UI" instance=ExtResource( 12 )]
 
 [node name="DarknessBlendLayer" type="CanvasModulate" parent="."]
 color = Color( 0.596078, 0.517647, 0.278431, 1 )

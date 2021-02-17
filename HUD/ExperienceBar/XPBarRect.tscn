@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://HUD/ExperienceBar/hud-xp-bar.png" type="Texture" id=1]
+[ext_resource path="res://HUD/ExperienceBar/XPBarRect.gd" type="Script" id=2]
+
+[node name="XPBarRect" type="TextureProgress"]
+margin_left = 46.0
+margin_top = 29.0
+margin_right = 97.0
+margin_bottom = 31.0
+texture_progress = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FlashTimer" type="Timer" parent="."]
+[connection signal="value_changed" from="." to="." method="_on_XPBarRect_value_changed"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
