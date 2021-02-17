@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HeartUIEmpty.png-417b0a6fe975644d9dba3671413f10e5.stex"
+path="res://.import/hud-hp-bar.png-50750e2bcd0c51736d3005f0fd7f3ec6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/HeartUIEmpty.png"
-dest_files=[ "res://.import/HeartUIEmpty.png-417b0a6fe975644d9dba3671413f10e5.stex" ]
+source_file="res://HUD/HealthBar/hud-hp-bar.png"
+dest_files=[ "res://.import/hud-hp-bar.png-50750e2bcd0c51736d3005f0fd7f3ec6.stex" ]
 
 [params]
 
