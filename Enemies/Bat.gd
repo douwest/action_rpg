@@ -10,10 +10,13 @@ const MOVEMENT_SPEED = 50
 const FRICTION = 400
 const KNOCKBACK_SPEED = 150
 const ACCELERATION = 35
+const EXPERIENCE = 5
 
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 var state = IDLE
+
+signal died
 
 onready var batStats = $HealthBar/Stats
 onready var batSprite = $AnimatedSprite
@@ -60,6 +63,8 @@ func _on_BatHurtbox_area_entered(damagingObject):
 #Receive killing hit
 func _on_Stats_no_health():
 	queue_free()
+	emit_signal("died")
+	PlayerStats.increaseExperienceBy(EXPERIENCE)
 
 #Flash the sprite
 func flashSprite():
