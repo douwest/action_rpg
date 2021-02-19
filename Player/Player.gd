@@ -25,7 +25,6 @@ onready var swordHitbox = $HitboxPivot/SwordHitbox
 
 func _ready():
 	playerStats.connect("no_health", self, "queue_free")
-	
 	animationTree.active = true
 	swordHitbox.knockback_vector = direction_vector
 

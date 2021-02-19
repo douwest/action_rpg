@@ -57,7 +57,7 @@ func get_health_percentage() -> float:
 	return (self.health / float(self.max_health)) * 100.0
 	
 func get_xp_percentage() -> float: 
-	# divide the experience we gained this level, by the experience it took to move from this level to the next.
+	# divide the experience we gained this level, by the experience it takes to move from this level to the next.
 	return ((self.current_experience - self.start_experience) / float(self.end_experience - self.start_experience)) * 100.0
 	
 func logForTesting() -> void: 
