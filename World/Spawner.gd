@@ -16,7 +16,7 @@ func _on_Timer_timeout():
 func spawn_bat() -> void:
 	timer.stop()
 	var bat = BatResource.instance()
-	bat.position = Vector2(randf() * max_spawn_distance, randf() * max_spawn_distance)
 	bat.spawn_position = Vector2(randf() * max_spawn_distance, randf() * max_spawn_distance)
+	bat.global_position = bat.spawn_position - Vector2(randf() * max_spawn_distance / 2, randf() * max_spawn_distance / 2)
 	bat.connect("died", timer, "start")
 	get_node('YSort').add_child(bat)
