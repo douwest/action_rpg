@@ -10,9 +10,12 @@ var current_experience = 0 setget set_current_experience
 var end_experience = 0
 var start_experience = 0
 
+export var portraitFrame: int = 0
+
 onready var hpBar = $HPBarRect
 onready var xpBar = $XPBarRect
 onready var lvlLabel = $LevelLabel
+onready var playerPortrait = $PortraitRect/PortraitSprites
 
 signal current_level_changed
 signal current_experience_changed
@@ -39,6 +42,7 @@ func set_current_experience(value: int):
 	logForTesting()
 
 func _ready():
+	self.playerPortrait.frame = portraitFrame
 	self.max_health = PlayerStats.max_health
 	self.health = PlayerStats.health
 	self.current_experience = PlayerStats.total_experience

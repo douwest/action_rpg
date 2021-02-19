@@ -857,6 +857,7 @@ script = ExtResource( 4 )
 [node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
 position = Vector2( 9.53674e-07, -1.78873e-07 )
 shape = SubResource( 46 )
+disabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
 
