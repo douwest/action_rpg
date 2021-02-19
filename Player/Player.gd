@@ -13,7 +13,7 @@ const ROLL_SPEED = 120
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var direction_vector = Vector2.LEFT #instantiate to player direction
+var direction_vector = Vector2.DOWN #instantiate to player direction
 var playerStats = PlayerStats
 
 onready var camera = $Camera2D
@@ -24,6 +24,9 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 
 func _ready():
+	setAnimationTo("Idle")
+	animationTree.set("parameters/Idle/blend_position", direction_vector)
+	
 	playerStats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = direction_vector

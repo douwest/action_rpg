@@ -15,6 +15,7 @@ const EXPERIENCE = 5
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 var state = IDLE
+var spawn_position = Vector2.ZERO
 
 signal died
 
@@ -33,12 +34,16 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)	
 			seek_player()		
 		WANDER:
-			wander()
+			var direction = (spawn_position - self.position).normalized()
+			velocity = velocity.move_toward((direction * MOVEMENT_SPEED) / 2, (ACCELERATION * delta) / 2)
+			seek_player()
 		CHASE:
 			if playerDetectionZone.can_see_player():
 				var player = playerDetectionZone.player
 				var direction = (player.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MOVEMENT_SPEED, ACCELERATION * delta)
+			else:
+				seek_player()
 	if velocity.x < 0:
 		batSprite.flip_h = true	
 	else:
@@ -49,9 +54,11 @@ func _physics_process(delta):
 func seek_player():
 	if playerDetectionZone.can_see_player():
 		state = CHASE
+	else:
+		state = WANDER
 
-func wander():
-	pass
+func wander(delta):
+	seek_player()
 
 #--------------------------------------------------------------------
 #Received hit

@@ -39,7 +39,7 @@
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 120, 200 )
+position = Vector2( 205.868, 46.2227 )
 
 [node name="ZoomingCamera2D" parent="YSort/Player" instance=ExtResource( 1 )]
 
@@ -51,15 +51,17 @@ autoplay = true
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Spawner" parent="YSort/Enemies" instance=ExtResource( 11 )]
-position = Vector2( 204.849, 78.0111 )
+position = Vector2( 94.2868, 232.911 )
+max_spawn_distance = 80
 respawn_time = 10
 
 [node name="Spawner2" parent="YSort/Enemies" instance=ExtResource( 11 )]
-position = Vector2( 364.239, 108.879 )
+position = Vector2( 383.882, 127.961 )
 respawn_time = 10
 
 [node name="Spawner3" parent="YSort/Enemies" instance=ExtResource( 11 )]
-position = Vector2( 6.17354, 303.626 )
+position = Vector2( 74.6437, 294.085 )
+max_spawn_distance = 75
 respawn_time = 10
 
 [node name="Spawner4" parent="YSort/Enemies" instance=ExtResource( 11 )]
