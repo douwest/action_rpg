@@ -8,13 +8,12 @@ enum {
 
 const ACCELERATION = 400
 const FRICTION = 500
-const MAX_SPEED = 100
+const MAX_SPEED = 75
 const ROLL_SPEED = 120
 
 var state = MOVE
 var velocity = Vector2.ZERO
 var direction_vector = Vector2.DOWN #instantiate to player direction
-var playerStats = PlayerStats
 
 onready var camera = $Camera2D
 onready var hurtTimer = $HurtTimer
@@ -22,12 +21,11 @@ onready var playerSprite = $PlayerSprite
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
+onready var stats = $Stats
 
 func _ready():
 	setAnimationTo("Idle")
 	animationTree.set("parameters/Idle/blend_position", direction_vector)
-	
-	playerStats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = direction_vector
 
@@ -82,8 +80,8 @@ func moveToward(to, speed):
 func setAnimationTo(string):
 	animationState.travel(string)
 	
-func setState(s):
-	state = s
+func setState(state):
+	self.state = state
 
 func resetVelocity():
 	velocity = Vector2.ZERO
@@ -103,7 +101,7 @@ func getInputVector():
 
 func _on_Hurtbox_area_entered(area):
 	flashSprite()
-	playerStats.health -= 1
+	stats.health -= area.damage
 
 #Flash the sprite
 func flashSprite():
@@ -115,3 +113,8 @@ func flashSprite():
 func _on_HurtTimer_timeout():
 	playerSprite.modulate = Color(1,1,1,1)	
 	hurtTimer.stop()
+
+
+func _on_Stats_no_health():
+	print('ouch')
+	queue_free()
