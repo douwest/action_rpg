@@ -57,7 +57,7 @@ script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 2
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 __meta__ = {
@@ -87,7 +87,7 @@ width = 1.0
 default_color = Color( 1, 0.4, 0.4, 1 )
 script = ExtResource( 6 )
 
-[node name="Stats" parent="HealthBar" instance=ExtResource( 5 )]
+[node name="BatStats" parent="HealthBar" instance=ExtResource( 5 )]
 max_health = 3
 
 [node name="HealthBarVisibilityTimer" type="Timer" parent="HealthBar"]
@@ -108,8 +108,8 @@ collision_mask = 32
 position = Vector2( 0, -15 )
 shape = SubResource( 10 )
 [connection signal="area_entered" from="BatHurtbox" to="." method="_on_BatHurtbox_area_entered"]
-[connection signal="health_changed" from="HealthBar/Stats" to="HealthBar" method="_on_Stats_health_changed"]
-[connection signal="no_health" from="HealthBar/Stats" to="." method="_on_Stats_no_health"]
+[connection signal="health_changed" from="HealthBar/BatStats" to="." method="_on_BatStats_health_changed"]
+[connection signal="no_health" from="HealthBar/BatStats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="HealthBar/HealthBarVisibilityTimer" to="HealthBar" method="_on_Timer_timeout"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
 

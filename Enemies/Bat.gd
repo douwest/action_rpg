@@ -20,7 +20,7 @@ var spawn_position = Vector2.ZERO
 
 signal died(experience)
 
-onready var batStats = $HealthBar/Stats
+onready var batStats = $HealthBar/BatStats
 onready var batSprite = $AnimatedSprite
 onready var flashTimer = $FlashTimer
 onready var playerDetectionZone = $PlayerDetectionZone

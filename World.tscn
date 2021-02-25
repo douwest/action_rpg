@@ -128,8 +128,10 @@ format = 1
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="CharacterUI" parent="UI" instance=ExtResource( 12 )]
+visible = false
 
 [node name="DarknessBlendLayer" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0.596078, 0.517647, 0.278431, 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

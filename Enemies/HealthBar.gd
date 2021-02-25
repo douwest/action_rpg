@@ -1,6 +1,6 @@
 extends Line2D
 
-onready var stats = $Stats
+onready var stats = $BatStats
 onready var timer = $HealthBarVisibilityTimer
 var startLength = 10.0 #px
 var lineLength = startLength
