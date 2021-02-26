@@ -8,7 +8,7 @@ enum {
 
 const ACCELERATION = 400
 const FRICTION = 500
-const MAX_SPEED = 65
+const MAX_SPEED = 200
 const ROLL_SPEED = 100
 
 var state = MOVE
