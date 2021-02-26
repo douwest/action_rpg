@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Tilesets/DungeonTileSet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Rooms/Room.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 8 )
+
+[node name="Room" type="Node2D"]
+position = Vector2( 0, 96 )
+z_index = -1
+script = ExtResource( 2 )
+
+[node name="DungeonTiles" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -96 )
+
+[node name="Sprite" parent="DungeonTiles" index="0"]
+collision_layer = 0
+collision_mask = 0
+tile_data = PoolIntArray( -131074, 0, 196609, -131073, 0, 65537, -196608, 0, 65537, -196607, 0, 196609, -65538, 0, 327688, -65537, 0, 327688, -131072, 0, 327688, -131071, 0, 327688, -2, 0, 327688, -1, 0, 327688, -65536, 0, 327688, -65535, 0, 327688, 65534, 0, 327688, 65535, 0, 327688, 0, 0, 327688, 1, 0, 327688, 131070, 0, 327688, 131071, 0, 327688, 65536, 0, 327688, 65537, 0, 327688, 196606, 0, 196609, 196607, 0, 65537, 131072, 0, 65537, 131073, 0, 196609 )
+
+[node name="NextRoomPortal" type="Area2D" parent="."]
+position = Vector2( 0, -96 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="NextRoomPortal"]
+position = Vector2( 0, -80 )
+shape = SubResource( 1 )
+
+[node name="PreviousRoomPortal" type="Area2D" parent="."]
+position = Vector2( 0, -88 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="PreviousRoomPortal"]
+position = Vector2( 0, 80 )
+shape = SubResource( 1 )
+
+[node name="SnappingPointTop" type="Position2D" parent="."]
+position = Vector2( 0, -192 )
+
+[node name="SnappingPointBottom" type="Position2D" parent="."]
+position = Vector2( 0, 192 )
+[connection signal="body_entered" from="NextRoomPortal" to="." method="_on_NextRoomPortal_body_entered"]
+[connection signal="body_entered" from="PreviousRoomPortal" to="." method="_on_PreviousRoomPortal_body_entered"]
+
+[editable path="DungeonTiles"]

@@ -15,7 +15,7 @@ var state = MOVE
 var velocity = Vector2.ZERO
 var direction_vector = Vector2.DOWN #instantiate to player direction
 
-onready var camera = $Camera2D
+onready var camera = $ZoomingCamera2D
 onready var hurtTimer = $HurtTimer
 onready var playerSprite = $PlayerSprite
 onready var animationTree = $AnimationTree

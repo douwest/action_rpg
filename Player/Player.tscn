@@ -90,6 +90,7 @@ tracks/4/keys = {
 resource_name = "AttackLeft"
 length = 0.5
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -97,10 +98,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 36, 37, 38, 39 ]
+"values": [ 66, 67, 68, 69, 70, 71 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -786,7 +787,7 @@ script = ExtResource( 2 )
 [node name="PlayerSprite" type="Sprite" parent="."]
 position = Vector2( 0, -8.06622 )
 texture = ExtResource( 1 )
-hframes = 66
+hframes = 84
 frame = 64
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
@@ -812,7 +813,7 @@ anims/RunRight = SubResource( 16 )
 anims/RunUp = SubResource( 17 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 volume_db = -20.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -836,7 +837,6 @@ script = ExtResource( 4 )
 [node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
 position = Vector2( -3, -5.24537e-07 )
 shape = SubResource( 46 )
-disabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
 

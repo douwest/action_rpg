@@ -14,7 +14,7 @@ func _ready():
 func _on_Timer_timeout():
 	visible = false
 
-func _on_Stats_health_changed(value):
+func _on_BatStats_health_changed():
 	visible = true
 	lineLength = startLength - (pixelsPerDamageUnit * (stats.max_health - stats.health))
 	timer.start()

@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Room",
+"language": "GDScript",
+"path": "res://Rooms/Room.gd"
+} ]
 _global_script_class_icons={
-
+"Room": ""
 }
 
 [application]
@@ -18,13 +23,6 @@ _global_script_class_icons={
 config/name="Action Rpg"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
-
-[autoload]
-
-PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
-IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
-UserData="*res://addons/github-integration/scripts/user_data.gd"
-RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 
 [display]
 

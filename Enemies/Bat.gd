@@ -70,6 +70,7 @@ func _on_BatHurtbox_area_entered(damagingObject):
 
 #Receive killing hit
 func _on_Stats_no_health():
+	print('died!')
 	queue_free()
 	emit_signal("died", experience)
 
