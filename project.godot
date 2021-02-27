@@ -41,6 +41,10 @@ enabled=PoolStringArray(  )
 
 singletons=[  ]
 
+[global]
+
+color=false
+
 [importer_defaults]
 
 texture={
@@ -124,4 +128,5 @@ ui_zoom_out={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+environment/default_clear_color=Color( 0.137255, 0.137255, 0.137255, 1 )
 environment/default_environment="res://default_env.tres"
