@@ -37,7 +37,7 @@ position = Vector2( 16, 16 )
 texture = ExtResource( 1 )
 vframes = 5
 hframes = 6
-frame = 13
+frame = 1
 
 [node name="OverlayRect" type="TextureRect" parent="."]
 margin_right = 112.0

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Stats/Stats.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/Healthbar/HealthBar.gd" type="Script" id=2]
+[ext_resource path="res://Stats/Stats.tscn" type="PackedScene" id=3]
+
+
+[node name="HealthBar" type="Line2D"]
+position = Vector2( -5, -25 )
+points = PoolVector2Array( 0, 0, 10, 0 )
+width = 1.0
+default_color = Color( 1, 0.4, 0.4, 1 )
+script = ExtResource( 2 )
+
+[node name="Stats" type="Node" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 1 )
+maxHealth = 4
+
+[node name="HealthBarVisibilityTimer" type="Timer" parent="."]
+[connection signal="health_changed" from="Stats" to="." method="_on_Stats_health_changed"]
+[connection signal="timeout" from="HealthBarVisibilityTimer" to="." method="_on_Timer_timeout"]
