@@ -3,9 +3,6 @@
 [ext_resource path="res://Rooms/AbstractRoom/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Light & Shadows/Lights/LightTexture.png" type="Texture" id=2]
 
-
-
-
 [node name="Room" instance=ExtResource( 1 )]
 snapPositionTop = Vector2( 0, -160 )
 snapPositionBottom = Vector2( 0, 160 )

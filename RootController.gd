@@ -8,7 +8,7 @@ func _ready():
 	player.stats.connect('health_changed', self, 'delegate_to_controller')
 	player.stats.connect('experience_changed', self, 'delegate_to_controller')
 	player.stats.connect('level_up', self, 'delegate_to_controller')
-	
+
 func delegate_to_controller():
 	uiController.update(player.stats)
 

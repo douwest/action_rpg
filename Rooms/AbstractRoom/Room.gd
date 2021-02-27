@@ -17,7 +17,6 @@ onready var previousPortal = $PreviousRoomPortal/CollisionShape
 func spawn_bats(number: int):
 	for i in range(number):
 		var bat = createEnemy()
-		print('spawned ' + str(number) + ' bats!')
 
 func _on_PreviousRoomPortal_body_entered(body):
 	emit_signal("previous_room_portal_entered")
