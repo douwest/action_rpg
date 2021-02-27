@@ -4,7 +4,7 @@ const XP_GROWTH = 0.4
 
 export(int) var strength = 1
 export(int) var max_health = 5 setget set_max_health
-export var current_level = 1 setget set_current_level
+export var current_level = 0 setget set_current_level
 var health = 5 setget set_health
 
 var current_experience = 0 setget set_current_experience

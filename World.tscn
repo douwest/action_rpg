@@ -128,7 +128,6 @@ format = 1
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="CharacterUI" parent="UI" instance=ExtResource( 12 )]
-visible = false
 
 [node name="DarknessBlendLayer" type="CanvasModulate" parent="."]
 visible = false

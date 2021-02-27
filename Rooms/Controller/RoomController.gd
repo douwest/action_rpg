@@ -3,9 +3,12 @@ extends Node2D
 var saved_rooms = []
 var current_room_index: int = 0
 
-onready var Room = preload("Rooms/Room.tscn")
-onready var Clearing = preload("Rooms/ClearingRoom/ClearingRoom.tscn")
-onready var Corridor = preload("Rooms/CorridorRoom/CorridorRoom.tscn")
+onready var Clearing = preload("../ClearingRoom/ClearingRoom.tscn")
+onready var Corridor = preload("../CorridorRoom/CorridorRoom.tscn")
+onready var LeftBentCorridor = preload("../CorridorRoom/LeftBentCorridorRoom.tscn")
+onready var RightBentCorridor = preload("../CorridorRoom/RightBentCorridorRoom.tscn")
+
+signal experience_dropped(experience)
 
 func _ready():
 	randomize()	
@@ -32,21 +35,15 @@ func provide_room_backward():
 	saved_rooms[current_room_index].toggle_direction()
 
 # Generate a new room
-func generate_new_room(spawn_position: Vector2):
-	var new_room
-	if rand_range(0, 1) > 0.25:
-		new_room = Corridor.instance()
-	else:
-		new_room = Clearing.instance()
-	var room_position = spawn_position + new_room.snapPositionTop
-	print('spawn, topsnap: ', str(spawn_position), str(saved_rooms[current_room_index].snapPositionBottom))
-	print('roompos: ', str(room_position))
+func generate_new_room(old_room_snap_top: Vector2):
+	var new_room = get_random_room_type_instance()
+	var room_position = old_room_snap_top - new_room.snapPositionBottom - self.position
 	add_room(new_room, room_position)
 	remove_room_by_index(current_room_index - 1)
 
 # Provide an already visited room forward
 func provide_visited_room_forwards():
-	var room = saved_rooms[current_room_index]
+	var room = saved_rooms[current_room_index + 1]
 	add_room(room, null)
 	remove_room_by_index(current_room_index - 2)
 
@@ -73,3 +70,21 @@ func add_room(room: Room, spawn_position):
 	connect_room(room)
 	if !saved_rooms.has(room):
 		saved_rooms.append(room)
+
+func get_random_room_type_instance() -> Room:
+	randomize()	
+	var room
+	var random = rand_range(0, 1.0)
+	if random < 0.4:
+		room = Corridor.instance()
+	elif random < 0.6:
+		room = Clearing.instance()
+	elif random < 0.8:
+		room = RightBentCorridor.instance()
+	else:
+		room = LeftBentCorridor.instance()
+	return room
+
+# A child room has had an experience drop, signal up to update player's stats.
+func signal_experience_drop(experience: int):
+	emit_signal('experience_dropped', experience)
