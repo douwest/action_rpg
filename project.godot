@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Room",
 "language": "GDScript",
-"path": "res://Rooms/Room.gd"
+"path": "res://Rooms/AbstractRoom/Room.gd"
 } ]
 _global_script_class_icons={
 "Room": ""
@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Action Rpg"
-run/main_scene="res://World.tscn"
+run/main_scene="res://Root.tscn"
 config/icon="res://icon.png"
 
 [display]

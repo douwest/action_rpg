@@ -1,7 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Light/FlickeringLightSource.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Light & Shadows/Lights/FlickeringLightSource.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World Objects/candleSprites.png" type="Texture" id=3]
+
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )

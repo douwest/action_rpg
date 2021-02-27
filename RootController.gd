@@ -10,9 +10,6 @@ func _ready():
 	player.stats.connect('level_up', self, 'delegate_to_controller')
 	
 func delegate_to_controller():
-	print(str(player.stats.health))
-	print(str(player.stats.current_level))
-	print(str(player.stats.current_experience))
 	uiController.update(player.stats)
 
 func _on_RoomController_experience_dropped(experience: int):
