@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Rooms/Room.tscn" type="PackedScene" id=1]
+
+[node name="Room" instance=ExtResource( 1 )]
+snapPositionTop = Vector2( 0, -224 )
+snapPositionBottom = Vector2( 0, 224 )
+
+[editable path="DungeonTiles"]
