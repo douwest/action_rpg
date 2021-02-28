@@ -1,0 +1,4 @@
+[gd_scene format=2]
+
+[node name="DarknessBlendLayer" type="CanvasModulate"]
+color = Color( 0.321569, 0.286275, 0.286275, 1 )

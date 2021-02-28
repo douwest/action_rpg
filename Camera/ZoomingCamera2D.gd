@@ -9,7 +9,7 @@ export var zoom_factor := 0.1
 export var zoom_duration := 0.2
 
 # The camera's target zoom level.
-var _zoom_level := 1.0 setget _set_zoom_level
+var _zoom_level := 2.0 setget _set_zoom_level
 
 # We store a reference to the scene's tween node.
 onready var tween: Tween = $Tween

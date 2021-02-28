@@ -1,7 +1,7 @@
 extends Node2D
 
 var saved_rooms = []
-var current_room_index: int = 0
+var current_room_index: int = 0 setget set_current_room_index
 
 onready var Clearing = preload("../ClearingRoom/ClearingRoom.tscn")
 onready var Corridor = preload("../CorridorRoom/CorridorRoom.tscn")
@@ -9,6 +9,13 @@ onready var LeftBentCorridor = preload("../CorridorRoom/LeftBentCorridorRoom.tsc
 onready var RightBentCorridor = preload("../CorridorRoom/RightBentCorridorRoom.tscn")
 
 signal experience_dropped(experience)
+signal current_room_index_changed(current_room_index)
+signal rooms_changed(saved_rooms)
+
+func set_current_room_index(index):
+	emit_signal('current_room_index_changed', current_room_index)
+	emit_signal('rooms_changed', saved_rooms)
+	current_room_index = index
 
 func _ready():
 	randomize()	

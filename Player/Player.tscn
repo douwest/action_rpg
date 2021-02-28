@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Player/Prototype/Player3-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Music and Sounds/PlayerStep2.wav" type="AudioStream" id=10]
 [ext_resource path="res://Music and Sounds/PlayerStep1.wav" type="AudioStream" id=11]
 [ext_resource path="res://Stats/Stats.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Light & Shadows/Lights/LightTexture.png" type="Texture" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.55329
@@ -19,8 +20,9 @@ height = 0.89342
 
 [sub_resource type="Animation" id=2]
 resource_name = "AttackDown"
-length = 0.4
+length = 0.5
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -28,10 +30,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 36, 37, 38, 39 ]
+"values": [ 72, 73, 74, 75, 76, 77 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -227,8 +229,9 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "AttackUp"
-length = 0.4
+length = 0.5
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
@@ -236,10 +239,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 28, 29, 30, 31 ]
+"values": [ 78, 79, 80, 81, 82, 83 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -248,7 +251,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -788,7 +791,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, -8.06622 )
 texture = ExtResource( 1 )
 hframes = 84
-frame = 64
+frame = 82
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
 rotation = -1.5708
@@ -827,6 +830,7 @@ parameters/Run/blend_position = Vector2( -0.0113821, 0.0351201 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
+rotation = 4.71239
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 position = Vector2( 24.0054, -4.17163 )
@@ -858,7 +862,12 @@ shape = SubResource( 47 )
 [node name="HurtTimer" type="Timer" parent="."]
 
 [node name="ZoomingCamera2D" parent="." instance=ExtResource( 7 )]
+zoom = Vector2( 1.5, 1.5 )
 max_zoom = 2.0
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 13 )
+energy = 0.6
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_HurtTimer_timeout"]
