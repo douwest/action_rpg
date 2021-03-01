@@ -2,7 +2,8 @@ extends Node
 
 const XP_GROWTH = 0.4
 
-export(int) var strength = 1
+export(int) var strength = 0
+export(float) var health_regen = 0
 export(int) var max_health = 5 setget set_max_health
 export var current_level = 0 setget set_current_level
 var health = 5 setget set_health
@@ -16,6 +17,12 @@ signal health_changed()
 
 signal level_up()
 signal experience_changed()
+
+func _ready(): 
+	health = max_health
+
+func _process(delta):
+	increaseHealthBy(delta * health_regen)
 
 func set_health(value):
 	health = clamp(value, 0, max_health)
@@ -31,7 +38,7 @@ func reduceHealthBy(amount):
 
 func increaseHealthBy(amount):
 	set_health(health + amount)
-	
+
 func set_max_health(value):
 	max_health = max(1, value)
 
@@ -44,8 +51,9 @@ func set_current_experience(value: int):
 	current_level = int(XP_GROWTH * sqrt(current_experience))
 	start_experience = pow(float(current_level) / XP_GROWTH, 2.0)
 	if(current_experience > end_experience):
-		print('level up')
-		emit_signal("level_up")
+		emit_signal("level_up", self)
+		set_max_health(max_health + current_level * 2)
+		strength += current_level
 	end_experience = pow(float(current_level + 1) / XP_GROWTH, 2.0)
 
 	logForTesting()

@@ -786,6 +786,7 @@ collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Stats" parent="." instance=ExtResource( 12 )]
+health_regen = 0.1
 
 [node name="PlayerSprite" type="Sprite" parent="."]
 position = Vector2( 0, -8.06622 )
@@ -862,12 +863,15 @@ shape = SubResource( 47 )
 [node name="HurtTimer" type="Timer" parent="."]
 
 [node name="ZoomingCamera2D" parent="." instance=ExtResource( 7 )]
-zoom = Vector2( 1.5, 1.5 )
-max_zoom = 2.0
+zoom = Vector2( 0.75, 0.75 )
+max_zoom = 0.75
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="Light" type="Light2D" parent="."]
+visible = false
 texture = ExtResource( 13 )
-energy = 0.6
+texture_scale = 0.7
+energy = 0.8
+[connection signal="level_up" from="Stats" to="." method="_on_Stats_level_up"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_HurtTimer_timeout"]

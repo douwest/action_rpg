@@ -1,7 +1,8 @@
 extends Node
 
-onready var player = $Player
+onready var player = $Players/Player
 onready var uiController = $UIController
+onready var netController = $NetworkController
 
 func _ready():
 	uiController.init(player.stats)

@@ -23,6 +23,7 @@ func _ready():
 
 # Provide a visited or new Room forward
 func provide_room_forward(spawn_position: Vector2):
+	print('next room @ ' + str(spawn_position))
 	if current_room_index + 1 >= saved_rooms.size():
 		generate_new_room(spawn_position)
 	else:
@@ -44,7 +45,7 @@ func provide_room_backward():
 # Generate a new room
 func generate_new_room(old_room_snap_top: Vector2):
 	var new_room = get_random_room_type_instance()
-	var room_position = old_room_snap_top - new_room.snapPositionBottom - self.position
+	var room_position = old_room_snap_top - new_room.snapPositionBottom
 	add_room(new_room, room_position)
 	remove_room_by_index(current_room_index - 1)
 
@@ -72,6 +73,7 @@ func remove_room_by_index(index: int):
 # Add a new room and add to saved rooms if not earlier encountered.
 func add_room(room: Room, spawn_position):
 	if(spawn_position != null):
+		print(spawn_position)
 		room.global_position = spawn_position
 	self.call_deferred('add_child', room)
 	connect_room(room)

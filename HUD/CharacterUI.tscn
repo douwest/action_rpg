@@ -43,6 +43,7 @@ frame = 1
 margin_right = 112.0
 margin_bottom = 48.0
 texture = ExtResource( 2 )
+expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false

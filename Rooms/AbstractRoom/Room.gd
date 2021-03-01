@@ -8,15 +8,16 @@ signal previous_room_portal_entered()
 export var snapPositionTop: Vector2 = Vector2.ZERO
 export var snapPositionBottom: Vector2 = Vector2.ZERO
 
-onready var BatScene = preload("../../Enemies/Bat/Bat.tscn")
+onready var Bat = preload("../../Enemies/Bat/Bat.tscn")
+onready var StrongBat = preload("../../Enemies/Bat/StrongBat.tscn")
 onready var snappingPointTop = $SnappingPointTop
 onready var snappingPointBottom = $SnappingPointBottom
 onready var nextPortal = $NextRoomPortal/CollisionShape
 onready var previousPortal = $PreviousRoomPortal/CollisionShape
 
-func spawn_bats(number: int):
+func spawn_enemies(number: int):
 	for i in range(number):
-		var bat = createEnemy()
+		var enemy = createEnemy()
 
 func _on_PreviousRoomPortal_body_entered(body):
 	emit_signal("previous_room_portal_entered")
@@ -30,19 +31,25 @@ func toggle_direction():
 
 func _ready():
 	randomize()
-	var bats = rand_range(0, 1.0)
-	if bats < 0.45:
+	var enemies = rand_range(0, 1.0)
+	if enemies < 0.4:
 		return
-	elif bats < 0.75:
-		spawn_bats(1)
-	elif bats < 0.95:
-		spawn_bats(2)
+	elif enemies < 0.7:
+		spawn_enemies(1)
+	elif enemies < 0.9:
+		spawn_enemies(2)
 	else:
-		spawn_bats(3)
+		spawn_enemies(3)
 
 func createEnemy() -> Node:
-	var bat = BatScene.instance()
-	bat.global_position += Vector2(rand_range(-60.0, 60.0), rand_range(-60.0, 60.0))
-	bat.connect("died", get_parent(), "signal_experience_drop")
-	self.get_node("Enemies").add_child(bat)
-	return bat
+	var enemy
+	randomize()
+	var which_enemy = rand_range(0, 1.0)
+	if which_enemy < 0.8:
+		enemy = Bat.instance()
+	else:
+		enemy = StrongBat.instance()
+	enemy.global_position += Vector2(rand_range(-60.0, 60.0), rand_range(-60.0, 60.0))
+	enemy.connect("died", get_parent(), "signal_experience_drop")
+	self.get_node("Enemies").add_child(enemy)
+	return enemy

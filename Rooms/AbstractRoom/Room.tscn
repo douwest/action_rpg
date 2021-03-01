@@ -10,19 +10,29 @@ extents = Vector2( 128, 8 )
 [node name="Room" type="Node2D"]
 z_index = -1
 script = ExtResource( 1 )
+snapPositionTop = Vector2( 0, -224 )
+snapPositionBottom = Vector2( 0, 224 )
+
+[node name="Lights" type="Node2D" parent="."]
 
 [node name="Enemies" type="YSort" parent="."]
-z_index = 1
+z_index = 10
 
-[node name="DungeonTiles" parent="." instance=ExtResource( 2 )]
+[node name="Tiles" type="Node2D" parent="."]
 
-[node name="Sprite" parent="DungeonTiles" index="0"]
+[node name="FloorTiles" parent="Tiles" instance=ExtResource( 2 )]
+
+[node name="Sprite" parent="Tiles/FloorTiles" index="0"]
 collision_layer = 0
 collision_mask = 0
-tile_data = PoolIntArray( -393218, 0, 524294, -393217, 0, 524294, -458752, 0, 524294, -458751, 0, 524294, -327682, 0, 524294, -327681, 0, 524294, -393216, 0, 524294, -393215, 0, 524294, -262146, 0, 524294, -262145, 0, 524294, -327680, 0, 524294, -327679, 0, 524294, -196610, 0, 524294, -196609, 0, 524294, -262144, 0, 524294, -262143, 0, 524294, -131074, 0, 524294, -131073, 0, 327688, -196608, 0, 327688, -196607, 0, 524294, -65538, 0, 393229, -65537, 0, 327693, -131072, 0, 327690, -131071, 0, 327688, -2, 0, 327688, -1, 0, 327688, -65536, 0, 524294, -65535, 0, 327688, 65534, 0, 327688, 65535, 0, 327690, 0, 0, 524294, 1, 0, 393224, 131070, 0, 327688, 131071, 0, 327688, 65536, 0, 327692, 65537, 0, 393224, 196606, 0, 524294, 196607, 0, 327688, 131072, 0, 327688, 131073, 0, 524294, 262142, 0, 524294, 262143, 0, 524294, 196608, 0, 524294, 196609, 0, 524294, 327678, 0, 524294, 327679, 0, 524294, 262144, 0, 524294, 262145, 0, 524294, 393214, 0, 524294, 393215, 0, 524294, 327680, 0, 524294, 327681, 0, 524294, 458750, 0, 524294, 458751, 0, 524294, 393216, 0, 524294, 393217, 0, 524294 )
+
+[node name="OverlayTiles" parent="Tiles" instance=ExtResource( 2 )]
+
+[node name="AccessoryTiles" parent="Tiles" instance=ExtResource( 2 )]
 
 [node name="NextRoomPortal" type="Area2D" parent="."]
 position = Vector2( 0, -72 )
+z_index = 10
 collision_layer = 0
 collision_mask = 2
 
@@ -31,6 +41,7 @@ shape = SubResource( 1 )
 
 [node name="PreviousRoomPortal" type="Area2D" parent="."]
 position = Vector2( 0, 72 )
+z_index = 10
 collision_layer = 0
 collision_mask = 2
 
@@ -45,8 +56,13 @@ position = Vector2( 0, -224 )
 position = Vector2( 0, 224 )
 
 [node name="DarknessBlendLayer" parent="." instance=ExtResource( 3 )]
+color = Color( 0.47451, 0.415686, 0.356863, 1 )
 [connection signal="tree_entered" from="." to="." method="_on_Room_tree_entered"]
 [connection signal="body_entered" from="NextRoomPortal" to="." method="_on_NextRoomPortal_body_entered"]
 [connection signal="body_entered" from="PreviousRoomPortal" to="." method="_on_PreviousRoomPortal_body_entered"]
 
-[editable path="DungeonTiles"]
+[editable path="Tiles/FloorTiles"]
+
+[editable path="Tiles/OverlayTiles"]
+
+[editable path="Tiles/AccessoryTiles"]

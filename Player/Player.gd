@@ -28,6 +28,7 @@ func _ready():
 	animationTree.set("parameters/Idle/blend_position", direction_vector)
 	animationTree.active = true
 	swordHitbox.knockback_vector = direction_vector
+	swordHitbox.damage = max(1, stats.strength)
 
 func _physics_process(delta):
 	match state:
@@ -109,12 +110,14 @@ func flashSprite():
 	hurtTimer.set_wait_time(0.15)
 	hurtTimer.start()
 
-
 func _on_HurtTimer_timeout():
 	playerSprite.modulate = Color(1,1,1,1)	
 	hurtTimer.stop()
 
-
 func _on_Stats_no_health():
 	print('ouch')
 	queue_free()
+
+
+func _on_Stats_level_up(stats):
+	swordHitbox.damage += stats.strength

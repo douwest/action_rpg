@@ -1,6 +1,6 @@
 extends Line2D
 
-onready var stats = $BatStats
+onready var stats = $Stats
 onready var timer = $HealthBarVisibilityTimer
 var startLength = 10.0 #px
 var lineLength = startLength
@@ -14,7 +14,7 @@ func _ready():
 func _on_Timer_timeout():
 	visible = false
 
-func _on_BatStats_health_changed():
+func _on_Stats_health_changed():
 	visible = true
 	lineLength = startLength - (pixelsPerDamageUnit * (stats.max_health - stats.health))
 	timer.start()
