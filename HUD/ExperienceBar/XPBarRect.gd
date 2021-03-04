@@ -6,7 +6,7 @@ export var flash_duration: float = 0.25
 
 onready var timer: Timer = $FlashTimer
 
-func _on_XPBarRect_value_changed(value):
+func _on_XPBarRect_value_changed(_value):
 	self.set_tint_progress(Color(
 		flash_strength, 
 		flash_strength, 

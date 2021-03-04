@@ -16,13 +16,13 @@ onready var nextPortal = $NextRoomPortal/CollisionShape
 onready var previousPortal = $PreviousRoomPortal/CollisionShape
 
 func spawn_enemies(number: int):
-	for i in range(number):
-		var enemy = createEnemy()
+	for _i in range(number):
+		createEnemy()
 
-func _on_PreviousRoomPortal_body_entered(body):
+func _on_PreviousRoomPortal_body_entered(_body):
 	emit_signal("previous_room_portal_entered")
 
-func _on_NextRoomPortal_body_entered(body):
+func _on_NextRoomPortal_body_entered(_body):
 	emit_signal("next_room_portal_entered", snappingPointTop.global_position)
 
 func toggle_direction():
@@ -49,7 +49,7 @@ func createEnemy() -> Node:
 		enemy = Bat.instance()
 	else:
 		enemy = StrongBat.instance()
+	self.get_node("Enemies").add_child(enemy)		
 	enemy.global_position += Vector2(rand_range(-60.0, 60.0), rand_range(-60.0, 60.0))
 	enemy.connect("died", get_parent(), "signal_experience_drop")
-	self.get_node("Enemies").add_child(enemy)
 	return enemy

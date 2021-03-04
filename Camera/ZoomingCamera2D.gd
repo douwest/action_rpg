@@ -13,7 +13,6 @@ var _zoom_level := 2.0 setget _set_zoom_level
 
 # We store a reference to the scene's tween node.
 onready var tween: Tween = $Tween
-onready var audioStream: AudioStreamPlayer = $AudioStreamPlayer
 
 func _set_zoom_level(value: float) -> void:
 	# audioStream.volume_db = -7 * _zoom_level
@@ -37,8 +36,6 @@ func _unhandled_input(event):
 	if event is InputEventMagnifyGesture:
 		_set_zoom_level(_zoom_level * event.factor)
 	if event.is_action_pressed("ui_zoom_in"):
-		# Inside a given class, we need to either write `self._zoom_level = ...` or explicitly
-		# call the setter function to use it.
 		_set_zoom_level(_zoom_level - zoom_factor)
 	if event.is_action_pressed("ui_zoom_out"):
 		_set_zoom_level(_zoom_level + zoom_factor)

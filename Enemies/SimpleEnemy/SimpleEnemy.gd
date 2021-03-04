@@ -65,7 +65,7 @@ func seek_player():
 	else:
 		state = WANDER
 
-func wander(delta):
+func wander(_delta):
 	seek_player()
 
 #Received hit

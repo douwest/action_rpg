@@ -6,8 +6,8 @@ onready var statusScreen = $CharacterUI
 func init(stats):
 	self.update(stats)
 
-func update(playerStats):
-	self.playerStats = playerStats
+func update(stats):
+	self.playerStats = stats
 	self.update_hp_bar()
 	self.update_xp_bar()
 	self.update_level()

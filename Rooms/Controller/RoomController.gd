@@ -18,6 +18,7 @@ func set_current_room_index(index):
 	current_room_index = index
 
 func _ready():
+	pause_mode = Node.PAUSE_MODE_STOP
 	randomize()	
 	add_room(Clearing.instance(), Vector2.ZERO)
 
