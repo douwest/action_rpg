@@ -15,7 +15,7 @@ var start_experience = 0
 signal no_health
 signal health_changed()
 
-signal level_up()
+signal level_up(value)
 signal experience_changed()
 
 func _ready(): 

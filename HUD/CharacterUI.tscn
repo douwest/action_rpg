@@ -21,6 +21,7 @@ script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+portraitFrameIndex = 13
 
 [node name="PortraitRect" type="Control" parent="."]
 margin_left = 6.0
@@ -37,7 +38,7 @@ position = Vector2( 16, 16 )
 texture = ExtResource( 1 )
 vframes = 5
 hframes = 6
-frame = 1
+frame = 13
 
 [node name="OverlayRect" type="TextureRect" parent="."]
 margin_right = 112.0
