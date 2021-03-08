@@ -18,7 +18,8 @@ signal health_changed()
 signal level_up(value)
 signal experience_changed()
 
-func _ready(): 
+func _ready():
+	strength = 1
 	health = max_health
 
 func _process(delta):

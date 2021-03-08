@@ -21,6 +21,9 @@ var direction_vector = Vector2.DOWN #instantiate to player direction
 var ticks_start = 0
 var ticks_elapsed_since_attack_start = 0
 
+export var charge_time: int = 600
+export var charge_delay: int = 190
+
 onready var camera = $ZoomingCamera2D
 onready var hurtTimer = $HurtTimer
 onready var playerSprite = $PlayerSprite
@@ -83,6 +86,14 @@ func attack_state(_delta):
 	setAnimationTo("Attack")
 
 func charge_state(delta):
+	if ticks_elapsed_since_attack_start > charge_time:
+		flashSprite()
+	else:
+		randomize()
+		var value = randi() % 1000000
+		simplex_noise.period = 16
+		var alpha = ((simplex_noise.get_noise_1d(value) + 1)/ 2.0) + 0.5
+		playerSprite.modulate = Color(0.987, alpha, 0.761, alpha)
 	setAnimationTo("Charge")
 
 func charge_attack_state(delta):
@@ -95,6 +106,8 @@ func roll_state(_delta):
 	setAnimationTo("Roll")
 
 func attack_end():
+	swordHitbox.damage = max(1, stats.strength)	
+	print('dealt damage: ' + str(swordHitbox.damage))
 	set_state(MOVE)
 	
 func roll_end():
@@ -102,6 +115,8 @@ func roll_end():
 	set_state(MOVE)
 
 func charge_end():
+	swordHitbox.damage = max(1, 2 * stats.strength)
+	print('dealt damage: ' + str(swordHitbox.damage))
 	set_state(CHARGE_ATTACK)
 
 func moveAndSlide():
@@ -136,11 +151,11 @@ func process_attack_inputs():
 	update_attack_ticks_start()
 	if Input.is_action_pressed("ui_attack"):
 		ticks_elapsed_since_attack_start = OS.get_ticks_msec() - ticks_start	
-	if ticks_elapsed_since_attack_start > 190:
-			set_state(CHARGE)
+	if ticks_elapsed_since_attack_start > charge_delay:
+		set_state(CHARGE)
 	if Input.is_action_just_released("ui_attack"):
 		ticks_elapsed_since_attack_start = OS.get_ticks_msec() - ticks_start
-		if ticks_elapsed_since_attack_start > 600:
+		if ticks_elapsed_since_attack_start > charge_time:
 			swordHitbox.knockback_vector = direction_vector	* 2		
 			set_state(CHARGE_ATTACK)
 		else:

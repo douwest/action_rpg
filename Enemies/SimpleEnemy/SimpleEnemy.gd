@@ -25,6 +25,7 @@ onready var sprite = $AnimatedSprite
 onready var flashTimer = $FlashTimer
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hitBox = $Hitbox
+onready var hurtBox = $Hurtbox/CollisionShape2D
 onready var experience = stats.max_health * XP_PER_HP
 
 func _ready():
@@ -82,10 +83,12 @@ func _on_Stats_no_health():
 #Flash the sprite
 func flashSprite():
 	sprite.modulate = Color(10,10,10,10)
-	flashTimer.set_wait_time(0.15)
+	flashTimer.set_wait_time(0.25)
+	hurtBox.set_disabled(true)
 	flashTimer.start()
 
 #Return to normal color and stop timer
 func _on_FlashTimer_timeout():
 	flashTimer.stop()
+	hurtBox.set_disabled(false)
 	sprite.modulate = Color(1,1,1,1)
