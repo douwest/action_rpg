@@ -21,14 +21,18 @@ var spawn_position = Vector2.ZERO
 signal died(experience)
 
 onready var stats = $HealthBar/Stats
-onready var sprite = $AnimatedSprite
+onready var sprite = $Sprite
+onready var animationPlayer = $AnimationPlayer
 onready var flashTimer = $FlashTimer
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var hitBox = $Hitbox
 onready var hurtBox = $Hurtbox/CollisionShape2D
+onready var bloodParticles = $BloodParticles
 onready var experience = stats.max_health * XP_PER_HP
+onready var softCollision = $SoftCollision
 
 func _ready():
+	animationPlayer.play("Flying")
 	if stats.strength == 0:
 		stats.strength = stats.current_level + 1
 	hitBox.set_damage(stats.strength)
@@ -58,6 +62,8 @@ func _physics_process(delta):
 	else:
 		sprite.flip_h = false
 
+	if softCollision.is_colliding():
+		velocity += softCollision.get_push_vector() * delta * 400
 	velocity = move_and_slide(velocity)
 
 func seek_player():
@@ -74,17 +80,27 @@ func _on_Hurtbox_area_entered(damagingObject):
 	flashSprite()
 	stats.reduceHealthBy(damagingObject.damage)
 	knockback = damagingObject.knockback_vector * KNOCKBACK_SPEED
+	emit_blood(knockback)
+
+func emit_blood(direction: Vector2):
+	bloodParticles.process_material.initial_velocity = max(abs(direction.x), abs(direction.y)) / 3
+	bloodParticles.process_material.set_direction(Vector3(direction.x, direction.y, 0))
+	bloodParticles.set_emitting(true)
 
 #Receive killing hit
 func _on_Stats_no_health():
-	queue_free()
+	animationPlayer.play("Death")
+	velocity = Vector2.ZERO
+
+func death_animation_finished():
 	emit_signal("died", experience)
+	queue_free()
 
 #Flash the sprite
 func flashSprite():
 	sprite.modulate = Color(10,10,10,10)
 	flashTimer.set_wait_time(0.25)
-	hurtBox.set_disabled(true)
+	hurtBox.call_deferred("set_disabled", true)
 	flashTimer.start()
 
 #Return to normal color and stop timer

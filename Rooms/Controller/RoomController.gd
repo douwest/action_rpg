@@ -73,8 +73,7 @@ func remove_room_by_index(index: int):
 
 # Add a new room and add to saved rooms if not earlier encountered.
 func add_room(room: Room, spawn_position):
-	if(spawn_position != null):
-		print(spawn_position)
+	if spawn_position != null:
 		room.global_position = spawn_position
 	self.call_deferred('add_child', room)
 	connect_room(room)

@@ -57,8 +57,6 @@ func set_current_experience(value: int):
 		strength += current_level
 	end_experience = pow(float(current_level + 1) / XP_GROWTH, 2.0)
 
-	logForTesting()
-
 func get_health_percentage() -> float: 
 	return (self.health / float(self.max_health)) * 100.0
 	
@@ -70,8 +68,3 @@ func get_xp_percentage() -> float:
 func get_current_level() -> int:
 	return self.current_level
 
-func logForTesting() -> void: 
-	print("current_xp: " + str(current_experience))	
-	print("current_level: " + str(current_level))
-	print("xp to next lv: " + str(end_experience - current_experience))
-	print("xp percentage: " + str(get_xp_percentage()))

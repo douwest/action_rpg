@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/footstep00.ogg-d7470aefc30076493aa054821921962d.oggstr"
+
+[deps]
+
+source_file="res://Music and Sounds/Kenney/RPG/footstep00.ogg"
+dest_files=[ "res://.import/footstep00.ogg-d7470aefc30076493aa054821921962d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

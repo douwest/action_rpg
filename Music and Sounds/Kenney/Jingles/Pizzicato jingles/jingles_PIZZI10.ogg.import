@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/jingles_PIZZI10.ogg-80084459260ca34b46d2c198967a980f.oggstr"
+
+[deps]
+
+source_file="res://Music and Sounds/Kenney/Jingles/Pizzicato jingles/jingles_PIZZI10.ogg"
+dest_files=[ "res://.import/jingles_PIZZI10.ogg-80084459260ca34b46d2c198967a980f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

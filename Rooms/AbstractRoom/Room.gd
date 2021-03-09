@@ -31,24 +31,11 @@ func toggle_direction():
 
 func _ready():
 	randomize()
-	var enemies = rand_range(0, 1.0)
-	if enemies < 0.4:
-		return
-	elif enemies < 0.7:
-		spawn_enemies(1)
-	elif enemies < 0.9:
-		spawn_enemies(2)
-	else:
-		spawn_enemies(3)
+	var enemies = max(1, floor(rand_range(0, 10.0)))
+	spawn_enemies(enemies)
 
 func createEnemy() -> Node:
-	var enemy
-	randomize()
-	var which_enemy = rand_range(0, 1.0)
-	if which_enemy < 0.8:
-		enemy = Bat.instance()
-	else:
-		enemy = StrongBat.instance()
+	var enemy = Bat.instance()
 	self.get_node("Enemies").add_child(enemy)		
 	enemy.global_position += Vector2(rand_range(-60.0, 60.0), rand_range(-60.0, 60.0))
 	enemy.connect("died", get_parent(), "signal_experience_drop")

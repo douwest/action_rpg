@@ -1,6 +1,6 @@
 extends Node
 
-onready var player = $RoomController/Players/Player
+onready var player = $RoomController/Player
 onready var uiController = $UIController
 
 onready var scene_tree = get_tree()

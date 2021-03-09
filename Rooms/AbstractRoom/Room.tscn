@@ -29,6 +29,7 @@ collision_mask = 0
 [node name="OverlayTiles" parent="Tiles" instance=ExtResource( 2 )]
 
 [node name="AccessoryTiles" parent="Tiles" instance=ExtResource( 2 )]
+z_index = 100
 
 [node name="NextRoomPortal" type="Area2D" parent="."]
 position = Vector2( 0, -72 )
@@ -56,7 +57,6 @@ position = Vector2( 0, -224 )
 position = Vector2( 0, 224 )
 
 [node name="DarknessBlendLayer" parent="." instance=ExtResource( 3 )]
-visible = false
 color = Color( 0.47451, 0.415686, 0.356863, 1 )
 [connection signal="body_entered" from="NextRoomPortal" to="." method="_on_NextRoomPortal_body_entered"]
 [connection signal="body_entered" from="PreviousRoomPortal" to="." method="_on_PreviousRoomPortal_body_entered"]
