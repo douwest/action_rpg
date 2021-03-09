@@ -1,7 +1,8 @@
 extends Area2D
 
 func is_colliding() -> bool:
-	return self.get_overlapping_areas().size() > 0
+	var areas = self.get_overlapping_areas()
+	return areas.size() > 0
 
 func get_push_vector() -> Vector2:
 	var areas = self.get_overlapping_areas()

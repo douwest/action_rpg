@@ -13,6 +13,7 @@ const FRICTION = 600
 const MAX_SPEED = 115
 const ROLL_SPEED = 1.25 * MAX_SPEED
 const ATTACK_MOVE_DISTANCE = 5
+const ATTACK_RANGE = 22
 
 var state = MOVE setget set_state
 var velocity = Vector2.ZERO
@@ -28,7 +29,8 @@ onready var camera = $ZoomingCamera2D
 onready var hurtTimer = $HurtTimer
 onready var playerSprite = $PlayerSprite
 onready var animationTree = $AnimationTree
-onready var swordHitbox = $HitboxPivot/SwordHitbox
+onready var swordHitbox = $BodyPivot/SwordHitbox
+onready var pivot = $BodyPivot
 onready var stats = $Stats
 onready var hurtBoxCollisionShape = $Hurtbox/CollisionShape2D
 onready var tween = $ZoomingCamera2D/Tween
@@ -55,7 +57,9 @@ func _physics_process(delta):
 		CHARGE_ATTACK: charge_attack_state(delta)
 
 func move_state(delta):
-	var gaze_vector = (get_global_mouse_position() - self.global_position)
+	var gaze_vector = self.global_position.direction_to(get_global_mouse_position()).normalized()
+	pivot.set_rotation_degrees(rad2deg(Vector2.ZERO.angle_to_point(gaze_vector)) + 180)
+	raycast.set_cast_to(gaze_vector)
 	var input_vector = getInputVector()
 	
 	if input_vector != Vector2.ZERO:
@@ -76,18 +80,20 @@ func move_state(delta):
 		set_state(ROLL)
 		
 	camera.moveCamera(input_vector, delta)
-	raycast.set_cast_to(gaze_vector)
 	moveAndSlide()
 
 func attack_state(_delta):
-	ticks_elapsed_since_attack_start = 0	
-	resetVelocity()
+	ticks_elapsed_since_attack_start = 0
+	resetVelocity()	
+	if Input.is_action_just_pressed("ui_roll"):
+		set_state(ROLL)
+
 	if combo_counter % 2 == 0:
 		setAnimationTo("Attack")
 	else:
 		setAnimationTo("Attack2")
 		
-func charge_state(delta):
+func charge_state(_delta: float):
 	if ticks_elapsed_since_attack_start > charge_time:
 		flashSprite()
 		charge_end()
@@ -96,7 +102,7 @@ func charge_state(delta):
 		playerSprite.modulate = Color(0.987, alpha, 0.761, alpha)
 		setAnimationTo("Charge")
 
-func charge_attack_state(delta):
+func charge_attack_state(_delta: float):
 	ticks_elapsed_since_attack_start = 0
 	resetVelocity()	
 	setAnimationTo("ChargeAttackRight")
@@ -104,6 +110,7 @@ func charge_attack_state(delta):
 func roll_state(_delta):
 	velocity = direction_vector * ROLL_SPEED
 	hurtBoxCollisionShape.disabled = true
+	swordHitbox.disable()
 	moveAndSlide()
 	setAnimationTo("Roll")
 

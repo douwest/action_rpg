@@ -40,7 +40,7 @@ func provide_room_backward():
 		add_room(tail_room, null)
 		remove_room_by_index(current_room_index + 2)
 		
-	current_room_index = max(0, current_room_index - 1)		
+	current_room_index = max(0, current_room_index - 1)
 	saved_rooms[current_room_index].toggle_direction()
 
 # Generate a new room
@@ -58,8 +58,8 @@ func provide_visited_room_forwards():
 
 # Connect portal signals of room
 func connect_room(room: Room): 
-	room.connect('next_room_portal_entered', self, 'provide_room_forward')
-	room.connect('previous_room_portal_entered', self, 'provide_room_backward')	
+	var _next = room.connect('next_room_portal_entered', self, 'provide_room_forward')
+	var _prev = room.connect('previous_room_portal_entered', self, 'provide_room_backward')	
 
 # Remove a room by reference
 func remove_room(room: Room):

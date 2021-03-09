@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/impactPlate_heavy_000.ogg-105a5099457fa19ca8968bb70f5794f4.oggstr"
+
+[deps]
+
+source_file="res://Music and Sounds/Kenney/Impacts/impactPlate_heavy_000.ogg"
+dest_files=[ "res://.import/impactPlate_heavy_000.ogg-105a5099457fa19ca8968bb70f5794f4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

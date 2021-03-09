@@ -23,7 +23,7 @@ func _set_zoom_level(value: float) -> void:
 	_zoom_level = clamp(value, min_zoom, max_zoom)
 	# Then, we ask the tween node to animate the camera's `zoom` property from its current value
 	# to the target zoom level.
-	tween.interpolate_property(
+	var _intpl = tween.interpolate_property(
 		self,
 		"zoom",
 		zoom,
@@ -33,7 +33,7 @@ func _set_zoom_level(value: float) -> void:
 		# Easing out means we start fast and slow down as we reach the target value.
 		tween.EASE_OUT
 	)
-	tween.start()
+	var _start = tween.start()
 
 func _unhandled_input(event):
 	if event is InputEventMagnifyGesture:
@@ -43,8 +43,8 @@ func _unhandled_input(event):
 	if event.is_action_pressed("ui_zoom_out"):
 		_set_zoom_level(_zoom_level + zoom_factor)
 		
-func moveCamera(input_vector: Vector2, delta: float):
-	tween.interpolate_property(
+func moveCamera(input_vector: Vector2, _delta: float):
+	var _intpl = tween.interpolate_property(
 		self,
 		"offset",
 		self.offset,
@@ -54,4 +54,4 @@ func moveCamera(input_vector: Vector2, delta: float):
 		# Easing out means we start fast and slow down as we reach the target value.
 		tween.EASE_OUT
 	)
-	tween.start()
+	var _start = tween.start()
