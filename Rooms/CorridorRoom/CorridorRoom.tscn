@@ -46,3 +46,5 @@ tile_data = PoolIntArray( -327682, 0, 1114112, -393215, 0, 1048581, -327679, 0, 
 [editable path="Tiles/OverlayTiles"]
 
 [editable path="Tiles/AccessoryTiles"]
+
+[editable path="Tiles/OverlapTiles"]

@@ -23,6 +23,7 @@ func _on_RoomController_experience_dropped(experience: int):
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		self.paused = not paused
+		uiController.play_pause_sound()
 		scene_tree.set_input_as_handled()
 
 func set_paused(value: bool):

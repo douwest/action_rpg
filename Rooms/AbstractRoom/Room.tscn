@@ -8,7 +8,6 @@
 extents = Vector2( 128, 8 )
 
 [node name="Room" type="Node2D"]
-z_index = -1
 script = ExtResource( 1 )
 snapPositionTop = Vector2( 0, -224 )
 snapPositionBottom = Vector2( 0, 224 )
@@ -18,7 +17,7 @@ snapPositionBottom = Vector2( 0, 224 )
 [node name="Enemies" type="YSort" parent="."]
 z_index = 10
 
-[node name="Tiles" type="Node2D" parent="."]
+[node name="Tiles" type="YSort" parent="."]
 
 [node name="FloorTiles" parent="Tiles" instance=ExtResource( 2 )]
 
@@ -29,7 +28,8 @@ collision_mask = 0
 [node name="OverlayTiles" parent="Tiles" instance=ExtResource( 2 )]
 
 [node name="AccessoryTiles" parent="Tiles" instance=ExtResource( 2 )]
-z_index = 100
+
+[node name="OverlapTiles" parent="Tiles" instance=ExtResource( 2 )]
 
 [node name="NextRoomPortal" type="Area2D" parent="."]
 position = Vector2( 0, -72 )
@@ -66,3 +66,5 @@ color = Color( 0.47451, 0.415686, 0.356863, 1 )
 [editable path="Tiles/OverlayTiles"]
 
 [editable path="Tiles/AccessoryTiles"]
+
+[editable path="Tiles/OverlapTiles"]

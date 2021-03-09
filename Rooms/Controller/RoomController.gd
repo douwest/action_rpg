@@ -7,6 +7,7 @@ onready var Clearing = preload("../ClearingRoom/ClearingRoom.tscn")
 onready var Corridor = preload("../CorridorRoom/CorridorRoom.tscn")
 onready var LeftBentCorridor = preload("../CorridorRoom/LeftBentCorridorRoom.tscn")
 onready var RightBentCorridor = preload("../CorridorRoom/RightBentCorridorRoom.tscn")
+onready var roomEnteredSound = $RoomEnteredSound
 
 signal experience_dropped(experience)
 signal current_room_index_changed(current_room_index)
@@ -44,6 +45,7 @@ func provide_room_backward():
 
 # Generate a new room
 func generate_new_room(old_room_snap_top: Vector2):
+	roomEnteredSound.play()
 	var new_room = get_random_room_type_instance()
 	var room_position = old_room_snap_top - new_room.snapPositionBottom
 	add_room(new_room, room_position)

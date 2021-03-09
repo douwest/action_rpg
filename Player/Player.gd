@@ -12,7 +12,7 @@ const ACCELERATION = 400
 const FRICTION = 600
 const MAX_SPEED = 115
 const ROLL_SPEED = 1.25 * MAX_SPEED
-const ATTACK_MOVE_DISTANCE = 5
+const ATTACK_MOVE_DISTANCE = 12
 const ATTACK_RANGE = 22
 
 var state = MOVE setget set_state
@@ -35,9 +35,13 @@ onready var stats = $Stats
 onready var hurtBoxCollisionShape = $Hurtbox/CollisionShape2D
 onready var tween = $ZoomingCamera2D/Tween
 onready var raycast = $RayCast2D
+onready var attackSoundPlayer = $AttackSoundPlayer
 
-onready var simplex_noise = OpenSimplexNoise.new()
 onready var animationState = animationTree.get("parameters/playback")
+
+var simplex_noise = OpenSimplexNoise.new()
+var attack1Hit = preload("res://Music and Sounds/Kenney/AttackHit1.wav")
+var attack1Miss = preload("res://Music and Sounds/Swipe.wav")
 
 func _ready():
 	animationTree.set("parameters/Idle/blend_position", direction_vector)
@@ -171,6 +175,7 @@ func process_attack_inputs():
 	if ticks_elapsed_since_attack_start > charge_delay:
 		set_state(CHARGE)
 	if Input.is_action_just_released("ui_attack"):
+		playerSprite.modulate = Color(1, 1, 1, 1)
 		ticks_elapsed_since_attack_start = OS.get_ticks_msec() - ticks_start
 		if ticks_elapsed_since_attack_start > charge_time:
 			swordHitbox.knockback_vector = direction_vector	* 2		

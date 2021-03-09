@@ -6,3 +6,6 @@ onready var collisionShape = $CollisionShape2D
 
 func disable():
 	collisionShape.set_disabled(true)
+
+func has_collisions() -> bool:
+	return self.get_overlapping_bodies().size() > 0

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 var playerStats
 onready var statusScreen = $CharacterUI
+onready var audioController = $UIAudioController
 
 func init(stats):
 	self.update(stats)
@@ -20,3 +21,6 @@ func update_xp_bar():
 
 func update_level():
 	statusScreen.set_lvl_label(playerStats.get_current_level())
+
+func play_pause_sound():
+	audioController.play()

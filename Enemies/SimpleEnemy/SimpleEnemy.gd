@@ -29,6 +29,7 @@ onready var hurtBox = $Hurtbox/CollisionShape2D
 onready var bloodParticles = $BloodParticles
 onready var experience = stats.max_health * XP_PER_HP
 onready var softCollision = $SoftCollision
+onready var hurtSound = $HurtSound
 
 func _ready():
 	animationPlayer.play("Flying")
@@ -79,6 +80,7 @@ func _on_Hurtbox_area_entered(damagingObject):
 	flashSprite()
 	stats.reduceHealthBy(damagingObject.damage)
 	knockback = damagingObject.knockback_vector * KNOCKBACK_SPEED
+	hurtSound.play()
 	emit_blood(knockback)
 
 func emit_blood(direction: Vector2):

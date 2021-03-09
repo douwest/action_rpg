@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Enemies/SimpleEnemy/SimpleEnemy.gd" type="Script" id=1]
 [ext_resource path="res://HUD/Enemy/HealthBar.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Enemies/Bat/Bat-sheet.png" type="Texture" id=7]
 [ext_resource path="res://Enemies/Bat/BloodMaterial.tres" type="Material" id=8]
 [ext_resource path="res://Collision/SoftCollision/SoftCollision.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Music and Sounds/Hurt.wav" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Death"
@@ -122,7 +123,7 @@ shape = SubResource( 4 )
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
 
 [node name="Stats" parent="HealthBar" index="0"]
-max_health = 9
+max_health = 25
 
 [node name="FlashTimer" type="Timer" parent="."]
 
@@ -152,6 +153,9 @@ explosiveness = 0.15
 randomness = 1.0
 visibility_rect = Rect2( 0, 0, 0, 24.9532 )
 process_material = SubResource( 7 )
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="HealthBar/Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]

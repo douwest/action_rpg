@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Parallax/ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://HUD/CharacterUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD/UIController.gd" type="Script" id=5]
 [ext_resource path="res://RootController.gd" type="Script" id=6]
+[ext_resource path="res://Music and Sounds/Pause.wav" type="AudioStream" id=7]
 
 [node name="RootController" type="Node"]
 script = ExtResource( 6 )
@@ -14,6 +15,9 @@ script = ExtResource( 6 )
 z_index = -1
 
 [node name="Player" parent="RoomController" instance=ExtResource( 1 )]
+z_index = 1
+
+[node name="ParallaxBackground" parent="RoomController" instance=ExtResource( 2 )]
 
 [node name="UIController" type="CanvasLayer" parent="."]
 script = ExtResource( 5 )
@@ -23,5 +27,6 @@ __meta__ = {
 
 [node name="CharacterUI" parent="UIController" instance=ExtResource( 4 )]
 
-[node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
+[node name="UIAudioController" type="AudioStreamPlayer2D" parent="UIController"]
+stream = ExtResource( 7 )
 [connection signal="experience_dropped" from="RoomController" to="." method="_on_RoomController_experience_dropped"]
