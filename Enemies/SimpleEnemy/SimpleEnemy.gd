@@ -12,7 +12,6 @@ export var KNOCKBACK_SPEED = 150
 export var ACCELERATION = 35
 export var XP_PER_HP = 1.5
 
-
 var knockback = Vector2.ZERO
 var velocity = Vector2.ZERO
 var state = IDLE
@@ -90,6 +89,7 @@ func emit_blood(direction: Vector2):
 #Receive killing hit
 func _on_Stats_no_health():
 	animationPlayer.play("Death")
+	hitBox.disable()
 	velocity = Vector2.ZERO
 
 func death_animation_finished():

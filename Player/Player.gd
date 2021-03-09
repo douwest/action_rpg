@@ -58,7 +58,7 @@ func _physics_process(delta):
 
 func move_state(delta):
 	var gaze_vector = self.global_position.direction_to(get_global_mouse_position()).normalized()
-	pivot.set_rotation_degrees(rad2deg(Vector2.ZERO.angle_to_point(gaze_vector)) + 180)
+	pivot.set_rotation_degrees(rad2deg(Vector2.ZERO.angle_to_point(gaze_vector) + PI))
 	raycast.set_cast_to(gaze_vector)
 	var input_vector = getInputVector()
 	
@@ -199,5 +199,5 @@ func _on_Stats_no_health():
 	print('You should have died!')
 	queue_free()
 
-func _on_Stats_level_up(playerStats):
-	swordHitbox.damage += playerStats.strength
+func _on_Stats_level_up():
+	swordHitbox.damage += self.stats.strength

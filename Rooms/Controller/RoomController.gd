@@ -39,7 +39,6 @@ func provide_room_backward():
 		var tail_room = saved_rooms[current_room_index - 2]
 		add_room(tail_room, null)
 		remove_room_by_index(current_room_index + 2)
-		
 	current_room_index = max(0, current_room_index - 1)
 	saved_rooms[current_room_index].toggle_direction()
 

@@ -15,7 +15,7 @@ var start_experience = 0
 signal no_health
 signal health_changed()
 
-signal level_up(value)
+signal level_up()
 signal experience_changed()
 
 func _ready():
@@ -52,8 +52,9 @@ func set_current_experience(value: int):
 	current_level = int(XP_GROWTH * sqrt(current_experience))
 	start_experience = pow(float(current_level) / XP_GROWTH, 2.0)
 	if(current_experience > end_experience):
-		emit_signal("level_up", self)
+		emit_signal("level_up")
 		set_max_health(max_health + current_level * 2)
+		set_health(max_health)
 		strength += current_level
 	end_experience = pow(float(current_level + 1) / XP_GROWTH, 2.0)
 
