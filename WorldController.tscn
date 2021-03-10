@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://WorldController.gd" type="Script" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Music and Sounds/BackgroundMusic/Dark ambient music For Reading - Royalty Free.ogg" type="AudioStream" id=3]
+[ext_resource path="res://World.gd" type="Script" id=4]
+
+[node name="WorldController" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="RoomMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+autoplay = true
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+
+[node name="ChunkGenerator" type="YSort" parent="YSort"]
+script = ExtResource( 4 )

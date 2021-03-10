@@ -35,13 +35,10 @@ onready var stats = $Stats
 onready var hurtBoxCollisionShape = $Hurtbox/CollisionShape2D
 onready var tween = $ZoomingCamera2D/Tween
 onready var raycast = $RayCast2D
-onready var attackSoundPlayer = $AttackSoundPlayer
 
 onready var animationState = animationTree.get("parameters/playback")
 
 var simplex_noise = OpenSimplexNoise.new()
-var attack1Hit = preload("res://Music and Sounds/Kenney/AttackHit1.wav")
-var attack1Miss = preload("res://Music and Sounds/Swipe.wav")
 
 func _ready():
 	animationTree.set("parameters/Idle/blend_position", direction_vector)

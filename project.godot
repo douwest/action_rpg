@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Chunk",
+"language": "GDScript",
+"path": "res://World Objects/Chunks/Chunk.gd"
+}, {
+"base": "Node2D",
 "class": "Room",
 "language": "GDScript",
 "path": "res://Rooms/AbstractRoom/Room.gd"
 } ]
 _global_script_class_icons={
+"Chunk": "",
 "Room": ""
 }
 

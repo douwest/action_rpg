@@ -5,8 +5,8 @@ var current_room_index: int = 0 setget set_current_room_index
 
 onready var Clearing = preload("../ClearingRoom/ClearingRoom.tscn")
 onready var Corridor = preload("../CorridorRoom/CorridorRoom.tscn")
-onready var LeftBentCorridor = preload("../CorridorRoom/LeftBentCorridorRoom.tscn")
-onready var RightBentCorridor = preload("../CorridorRoom/RightBentCorridorRoom.tscn")
+#onready var LeftBentCorridor = preload("../CorridorRoom/LeftBentCorridorRoom.tscn")
+#onready var RightBentCorridor = preload("../CorridorRoom/RightBentCorridorRoom.tscn")
 onready var roomEnteredSound = $RoomEnteredSound
 
 signal experience_dropped(experience)
@@ -20,7 +20,7 @@ func set_current_room_index(index):
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_STOP
-	randomize()	
+	randomize()
 	add_room(Clearing.instance(), Vector2.ZERO)
 
 # Provide a visited or new Room forward
@@ -90,9 +90,9 @@ func get_random_room_type_instance() -> Room:
 	elif random < 0.6:
 		room = Clearing.instance()
 	elif random < 0.8:
-		room = RightBentCorridor.instance()
+		room = Corridor.instance()
 	else:
-		room = LeftBentCorridor.instance()
+		room = Clearing.instance()
 	return room
 
 # A child room has had an experience drop, signal up to update player's stats.

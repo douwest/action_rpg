@@ -27,7 +27,7 @@ z_index = 100
 z_as_relative = false
 
 [node name="Sprite" parent="Tiles/OverlapTiles" index="0"]
-tile_data = PoolIntArray( -131075, 0, 851969, -196606, 0, 851969, 65533, 0, 851969 )
+tile_data = PoolIntArray( -196624, 0, 0, -131075, 0, 851969, -196606, 0, 851969, 65533, 0, 851969 )
 
 [node name="NextRoomPortal" parent="." index="3"]
 position = Vector2( 0, -144 )

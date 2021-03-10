@@ -58,24 +58,24 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=3]
 radius = 8.76427
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 4.0
 height = 0.0
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=5]
 radius = 7.12132
 height = 2.0
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=6]
 radius = 78.0064
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=7]
 radius = 5.87633
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 gravity = Vector3( 0, 50, 0 )
 initial_velocity = 20.0
@@ -105,11 +105,11 @@ anims/Flying = SubResource( 2 )
 [node name="SoftCollision" parent="." instance=ExtResource( 9 )]
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 8 )
+shape = SubResource( 3 )
 
 [node name="EnemyCollisionShape" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -118,12 +118,12 @@ collision_layer = 2147483656
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 scale = Vector2( 1, 1 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
 
 [node name="Stats" parent="HealthBar" index="0"]
-max_health = 25
+max_health = 5
 
 [node name="FlashTimer" type="Timer" parent="."]
 
@@ -132,14 +132,14 @@ max_health = 25
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 0.898039, 0, 0, 0.615686 )
 self_modulate = Color( 1, 0, 0, 0.341176 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -17 )
 collision_mask = 32
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="BloodParticles" type="Particles2D" parent="."]
 material = ExtResource( 8 )
@@ -152,10 +152,11 @@ speed_scale = 3.0
 explosiveness = 0.15
 randomness = 1.0
 visibility_rect = Rect2( 0, 0, 0, 24.9532 )
-process_material = SubResource( 7 )
+process_material = SubResource( 8 )
 
-[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+volume_db = -12.0
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="HealthBar/Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="FlashTimer" to="." method="_on_FlashTimer_timeout"]
