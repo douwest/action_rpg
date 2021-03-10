@@ -75,9 +75,7 @@
 4/shapes = [  ]
 4/z_index = 0
 
-[node name="Chunk" type="Area2D"]
-collision_layer = 0
-collision_mask = 2
+[node name="Chunk" type="YSort"]
 script = ExtResource( 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -87,4 +85,13 @@ cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 cell_tile_origin = 1
 format = 1
 
-[node name="PlayerDetectionLayer" type="CollisionPolygon2D" parent="."]
+[node name="Foliage" type="YSort" parent="."]
+
+[node name="Enemies" type="YSort" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="PlayerDetectionLayer" type="CollisionPolygon2D" parent="Area2D"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

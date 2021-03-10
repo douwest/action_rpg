@@ -15,7 +15,7 @@ autoplay = true
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-
 [node name="ChunkGenerator" type="YSort" parent="YSort"]
 script = ExtResource( 4 )
+
+[node name="Player" parent="YSort/ChunkGenerator" instance=ExtResource( 2 )]
