@@ -24,6 +24,7 @@ func generate_self() -> void:
 	generate_detection_layer()
 	generate_floor()
 	generate_trees()
+	generate_enemies()
 
 func generate_detection_layer() -> void:
 	var chunk_edge_length = (tile_size * chunk_size)
@@ -56,13 +57,14 @@ func generate_enemies() -> void:
 		for j in chunk_size:
 			var x = self.global_position.x + i * tile_size.x
 			var y = self.global_position.y + j * tile_size.y
-			if simplex_noise.get_noise_2d(x, y) < -0.47:
+			if simplex_noise.get_noise_2d(x, y) < -0.4999:
 				var enemy = Enemy.instance()
-				enemy.position = Vector2(
-					i * tile_size.x, 
-					j * tile_size.y
+				enemy.global_position = Vector2(
+					x + (i * tile_size.x), 
+					y + (j * tile_size.y)
 				)
-				get_node('Enemies').add_child(enemy)
+				enemy.spawn_position = enemy.global_position + Vector2(1, 1) * rand_range(0,50)		
+				get_node("../../EntityManager/Enemies").add_child(enemy)
 
 func get_random_cell_unif(i: int, j: int) -> int:
 	var x = self.global_position.x + i * tile_size.x

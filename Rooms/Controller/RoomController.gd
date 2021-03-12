@@ -5,8 +5,8 @@ var current_room_index: int = 0 setget set_current_room_index
 
 onready var Clearing = preload("../ClearingRoom/ClearingRoom.tscn")
 onready var Corridor = preload("../CorridorRoom/CorridorRoom.tscn")
-#onready var LeftBentCorridor = preload("../CorridorRoom/LeftBentCorridorRoom.tscn")
-#onready var RightBentCorridor = preload("../CorridorRoom/RightBentCorridorRoom.tscn")
+onready var SnakePathRoom = preload("../SnakePathRoom/OutdoorSnakePathRoomRight.tscn")
+
 onready var roomEnteredSound = $RoomEnteredSound
 
 signal experience_dropped(experience)

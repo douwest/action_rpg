@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://HUD/UIController.gd" type="Script" id=1]
+[ext_resource path="res://HUD/CharacterUI.gd" type="Script" id=2]
+[ext_resource path="res://Music and Sounds/Pause.wav" type="AudioStream" id=3]
+[ext_resource path="res://HUD/CharacterUI.tscn" type="PackedScene" id=4]
+
+[node name="UIController" type="CanvasLayer"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CharacterUI" type="Control" parent="." instance=ExtResource( 4 )]
+margin_right = 120.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+portraitFrameIndex = 13
+
+[node name="UIAudioController" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
