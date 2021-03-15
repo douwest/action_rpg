@@ -68,4 +68,3 @@ func get_xp_percentage() -> float:
 
 func get_current_level() -> int:
 	return self.current_level
-

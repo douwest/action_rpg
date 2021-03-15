@@ -36,13 +36,9 @@ func _set_zoom_level(value: float) -> void:
 	var _start = tween.start()
 
 func _unhandled_input(event):
-	if event is InputEventMagnifyGesture:
-		_set_zoom_level(_zoom_level * event.factor)
 	if event.is_action_pressed("ui_zoom_in"):
-		print('zoom in!')		
 		_set_zoom_level(_zoom_level - zoom_factor)
 	if event.is_action_pressed("ui_zoom_out"):
-		print('zoom out!')
 		_set_zoom_level(_zoom_level + zoom_factor)
 		
 func moveCamera(input_vector: Vector2, _delta: float):
@@ -52,7 +48,7 @@ func moveCamera(input_vector: Vector2, _delta: float):
 		self.offset,
 		input_vector * max_distance_from_player,
 		CAMERA_MOVE_DURATION,
-		tween.EASE_IN,
+		tween.TRANS_SINE,
 		# Easing out means we start fast and slow down as we reach the target value.
 		tween.EASE_OUT
 	)

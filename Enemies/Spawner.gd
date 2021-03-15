@@ -1,7 +1,7 @@
 extends Node2D
 
 export var max_spawn_distance = 50
-export var respawn_time = 2
+export var respawn_time = 2 setget set_respawn_time
 
 onready var BatResource = preload("Bat/Bat.tscn")
 onready var timer = $Timer
@@ -20,3 +20,6 @@ func spawn_bat() -> void:
 	bat.global_position = bat.spawn_position - Vector2(randf() * max_spawn_distance / 2, randf() * max_spawn_distance / 2)
 	bat.connect("died", timer, "start")
 	get_node('YSort').add_child(bat)
+
+func set_respawn_time(time: int) -> void:
+	self.respawn_time = time

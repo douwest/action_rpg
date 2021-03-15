@@ -2,6 +2,7 @@ extends Node
 
 onready var player = $Player
 onready var uiController = $UIController
+onready var camera = $Player/ZoomingCamera2D
 
 onready var scene_tree = get_tree()
 var paused = false setget set_paused
@@ -26,6 +27,15 @@ func _process(_delta):
 		uiController.play_pause_sound()
 		scene_tree.set_input_as_handled()
 
+func _physics_process(delta):
+	self.moveCamera(player.getInputVector(), delta)
+
 func set_paused(value: bool):
 	paused = value
 	scene_tree.paused = value
+
+func _on_Player_died():
+	uiController.show_death_screen()
+
+func moveCamera(input_vector: Vector2, delta):
+	camera.moveCamera(input_vector, delta)

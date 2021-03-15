@@ -1,5 +1,4 @@
 extends Node2D
-
 class_name Room
 
 signal next_room_portal_entered()
@@ -7,9 +6,12 @@ signal previous_room_portal_entered()
 
 export var snapPositionTop: Vector2 = Vector2.ZERO
 export var snapPositionBottom: Vector2 = Vector2.ZERO
+export var maxEnemies = 10
 
 onready var Bat = preload("../../Enemies/Bat/Bat.tscn")
-onready var StrongBat = preload("../../Enemies/Bat/StrongBat.tscn")
+onready var Skelly = preload("../../Enemies/Skeleton/Skeleton.tscn")
+onready var enemies: Array = [Bat, Skelly]
+
 onready var snappingPointTop = $SnappingPointTop
 onready var snappingPointBottom = $SnappingPointBottom
 onready var nextPortal = $NextRoomPortal/CollisionShape
@@ -31,12 +33,12 @@ func toggle_direction():
 
 func _ready():
 	randomize()
-	var enemies = max(1, floor(rand_range(0, 10.0)))
+	var enemies = max(1, floor(rand_range(0, maxEnemies)))
 	spawn_enemies(enemies)
 
 func createEnemy() -> Node:
-	var enemy = Bat.instance()
-	self.get_node("Enemies").add_child(enemy)		
+	var enemy = enemies[randi() % enemies.size()].instance()
+	self.get_node("Enemies").add_child(enemy)
 	enemy.global_position += Vector2(rand_range(-60.0, 60.0), rand_range(-60.0, 60.0))
 	enemy.connect("died", get_parent(), "signal_experience_drop")
 	return enemy

@@ -5,7 +5,10 @@ var current_room_index: int = 0 setget set_current_room_index
 
 onready var Clearing = preload("../ClearingRoom/ClearingRoom.tscn")
 onready var Corridor = preload("../CorridorRoom/CorridorRoom.tscn")
-onready var SnakePathRoom = preload("../SnakePathRoom/OutdoorSnakePathRoomRight.tscn")
+onready var StartRoom = preload("../StartRoom/StartRoom.tscn")
+onready var LeftCorridor = preload("../LeftCorridorRoom/LeftCorridorRoom.tscn")
+
+onready var Rooms: Array = [Clearing, Corridor, LeftCorridor]
 
 onready var roomEnteredSound = $RoomEnteredSound
 
@@ -21,7 +24,7 @@ func set_current_room_index(index):
 func _ready():
 	pause_mode = Node.PAUSE_MODE_STOP
 	randomize()
-	add_room(Clearing.instance(), Vector2.ZERO)
+	add_room(StartRoom.instance(), Vector2.ZERO)
 
 # Provide a visited or new Room forward
 func provide_room_forward(spawn_position: Vector2):
@@ -83,16 +86,7 @@ func add_room(room: Room, spawn_position):
 
 func get_random_room_type_instance() -> Room:
 	randomize()	
-	var room
-	var random = rand_range(0, 1.0)
-	if random < 0.4:
-		room = Corridor.instance()
-	elif random < 0.6:
-		room = Clearing.instance()
-	elif random < 0.8:
-		room = Corridor.instance()
-	else:
-		room = Clearing.instance()
+	var room = Rooms[randi() % Rooms.size()].instance()
 	return room
 
 # A child room has had an experience drop, signal up to update player's stats.

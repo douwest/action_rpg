@@ -1,8 +1,11 @@
 extends CanvasLayer
 
 var playerStats
+var showing_death_screen = false
+
 onready var statusScreen = $CharacterUI
 onready var audioController = $UIAudioController
+onready var deathScreen = $DeathScreen
 
 func init(stats):
 	self.update(stats)
@@ -24,3 +27,10 @@ func update_level():
 
 func play_pause_sound():
 	audioController.play()
+
+func show_death_screen():
+	if !showing_death_screen:
+		print('show')
+		deathScreen.feather_in()
+		showing_death_screen = true
+	

@@ -5,7 +5,8 @@ enum {
 	ROLL,
 	ATTACK,
 	CHARGE,
-	CHARGE_ATTACK
+	CHARGE_ATTACK,
+	DEAD
 }
 
 const ACCELERATION = 400
@@ -33,12 +34,15 @@ onready var swordHitbox = $BodyPivot/SwordHitbox
 onready var pivot = $BodyPivot
 onready var stats = $Stats
 onready var hurtBoxCollisionShape = $Hurtbox/CollisionShape2D
-onready var tween = $ZoomingCamera2D/Tween
 onready var raycast = $RayCast2D
+onready var respawn_timer = $RespawnTimer
+onready var shadow_sprite = $ShadowSprite
 
 onready var animationState = animationTree.get("parameters/playback")
 
 var simplex_noise = OpenSimplexNoise.new()
+
+signal died
 
 func _ready():
 	animationTree.set("parameters/Idle/blend_position", direction_vector)
@@ -51,6 +55,7 @@ func _ready():
 func _physics_process(delta):
 	process_attack_inputs()	
 	match state:
+		DEAD: dead_state()
 		MOVE: move_state(delta)
 		ROLL: roll_state(delta)
 		ATTACK: attack_state(delta)
@@ -80,7 +85,6 @@ func move_state(delta):
 	elif Input.is_action_just_pressed("ui_roll"):
 		set_state(ROLL)
 		
-	camera.moveCamera(input_vector, delta)
 	moveAndSlide()
 
 func attack_state(_delta):
@@ -114,6 +118,20 @@ func roll_state(_delta):
 	swordHitbox.disable()
 	moveAndSlide()
 	setAnimationTo("Roll")
+
+func dead_state():
+	emit_signal("died")
+	resetVelocity()
+	hurtBoxCollisionShape.disabled = true
+	swordHitbox.disable()
+	setAnimationTo("Die")
+	respawn_timer.start()
+	if Input.is_action_just_pressed("ui_accept"):
+		respawn()
+
+func respawn():
+	respawn_timer.stop()
+	get_tree().reload_current_scene()
 
 func attack_end():
 	swordHitbox.damage = max(1, stats.strength)	
@@ -166,21 +184,22 @@ func getInputVector():
 	return vector
 
 func process_attack_inputs():
-	update_attack_ticks_start()
-	if Input.is_action_pressed("ui_attack"):
-		ticks_elapsed_since_attack_start = OS.get_ticks_msec() - ticks_start	
-	if ticks_elapsed_since_attack_start > charge_delay:
-		set_state(CHARGE)
-	if Input.is_action_just_released("ui_attack"):
-		playerSprite.modulate = Color(1, 1, 1, 1)
-		ticks_elapsed_since_attack_start = OS.get_ticks_msec() - ticks_start
-		if ticks_elapsed_since_attack_start > charge_time:
-			swordHitbox.knockback_vector = direction_vector	* 2		
-			set_state(CHARGE_ATTACK)
-		else:
-			swordHitbox.knockback_vector = direction_vector
-			combo_counter += 1
-			set_state(ATTACK)
+	if !state == DEAD:
+		update_attack_ticks_start()
+		if Input.is_action_pressed("ui_attack"):
+			ticks_elapsed_since_attack_start = OS.get_ticks_msec() - ticks_start	
+		if ticks_elapsed_since_attack_start > charge_delay:
+			set_state(CHARGE)
+		if Input.is_action_just_released("ui_attack"):
+			playerSprite.modulate = Color(1, 1, 1, 1)
+			ticks_elapsed_since_attack_start = OS.get_ticks_msec() - ticks_start
+			if ticks_elapsed_since_attack_start > charge_time:
+				swordHitbox.knockback_vector = direction_vector	* 2		
+				set_state(CHARGE_ATTACK)
+			else:
+				swordHitbox.knockback_vector = direction_vector
+				combo_counter += 1
+				set_state(ATTACK)
 
 func get_random_simplex_value_1d() -> float:
 	randomize()
@@ -198,8 +217,10 @@ func _on_HurtTimer_timeout():
 	hurtTimer.stop()
 
 func _on_Stats_no_health():
-	print('You should have died!')
-	queue_free()
+	set_state(DEAD)
 
 func _on_Stats_level_up():
 	swordHitbox.damage += self.stats.strength
+
+func _on_RespawnTimer_timeout():
+	self.respawn()
